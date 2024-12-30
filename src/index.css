@@ -1,0 +1,55 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Hanken Grotesk", serif;
+  padding: 0;
+}
+
+body{
+  background-color: #282726;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+h1{
+  font-weight: 600;
+  font-size: 20px;
+  color: #F9F4DA;
+}
+
+p{
+  color: #8E8E8E;
+  font-weight: 500;
+  font-size: 14px;
+  width: 45ch;
+  text-align: center;
+}
+
+.languages{
+  list-style: none;
+  display: flex;
+  gap: 1.5px;
+  max-width: 253px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.languages li button{
+  padding: 4.5px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F9F4DA;
+  background-color: red;
+  border: none;
+}
