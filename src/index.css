@@ -14,14 +14,21 @@ body{
 }
 
 .container{
+  width: 90%;
+  max-width: 34rem;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 }
 
-h1{
+header{
+  max-width: 27.5rem;
+}
+
+h1,h2{
+  text-align: center;
   font-weight: 600;
   font-size: 20px;
   color: #F9F4DA;
@@ -30,26 +37,98 @@ h1{
 p{
   color: #8E8E8E;
   font-weight: 500;
-  font-size: 14px;
-  width: 45ch;
+  font-size: 16px;
   text-align: center;
 }
 
+.game-result{
+  width: 100%;
+  max-width: 25rem;
+  border-radius: 4px;
+  background-color: #10A95B;
+  color: #F9F4DA;
+  padding-block: .5rem;
+  margin-top: 20px;
+
+  & p{
+    color: #F9F4DA;
+  }
+}
+
+.languages__container{
+  margin-block: 36px;
+}
 .languages{
   list-style: none;
   display: flex;
-  gap: 1.5px;
-  max-width: 253px;
+  gap: 3px;
+  max-width: 300px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .languages li button{
-  padding: 4.5px;
+  padding: 5px;
   border-radius: 3px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: #F9F4DA;
   background-color: red;
   border: none;
+  cursor: pointer;
+}
+
+.word{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 36px;
+}
+
+.char{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  aspect-ratio: 1;
+  text-transform: uppercase;
+  color: #F9F4DA;
+  font-weight: 700;
+  font-size: 18;
+  background-color: #323232;
+  padding: 6px;
+  border-bottom: 1px solid #F9F4DA;
+}
+
+.keyboard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.key{
+  color: #1E1E1E;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #FCBA29;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px;
+  width: 40px;
+  aspect-ratio: 1;
+  text-transform: uppercase;
+  border: 1px solid #D7D7D7;
+}
+
+.newgame{
+  background-color: #11B5E5;
+  color: #1E1E1E;
+  border: 1px solid #D7D7D7;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 228px;
+  height: 40px;
+  margin-top: 36px;
 }
