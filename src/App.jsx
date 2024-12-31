@@ -1,11 +1,20 @@
 import { languages } from "./languages"
 import { useState } from 'react'
+import { clsx } from 'clsx'
 
 function App() {
 
-  const [word, setWord] = useState('react')
+  const [word, setWord] = useState("react")
+
+  const [guessedLetters, setGuessedLetters] = useState([])
 
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
+
+  function handleClick(letter) {
+    setGuessedLetters(prevArr =>
+      prevArr.includes(letter) ? prevArr : [...prevArr, letter]
+    )
+  }
 
   return (
     <main className="container">
@@ -43,16 +52,32 @@ function App() {
 
       <section className="keyboard">
         {
-          alphabets.split('').map(char => (
-            <button className="key" key={char}>{char}</button>
-          ))
+
+          alphabets.split('').map(char => {
+            const isGuessed = guessedLetters.includes(char);
+            const isPresent = isGuessed && word.includes(char)
+            const isAbsent = isGuessed && !word.includes(char)
+
+            {/* const keyState = isGuessed ? isPresent ? 'present' : 'absent' : '' */ }
+
+            const keyState = clsx({
+              present: isPresent,
+              absent: isAbsent
+            })
+
+            return (
+              <button onClick={() => handleClick(char)} className={`key ${keyState}`} key={char}>{char}</button>
+            )
+
+          }
+          )
         }
       </section>
 
       <button className="newgame">
         New Game
       </button>
-    </main>
+    </main >
   )
 }
 

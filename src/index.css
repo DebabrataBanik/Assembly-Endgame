@@ -132,3 +132,11 @@ p{
   height: 40px;
   margin-top: 36px;
 }
+
+.key.present{
+  background-color: #10A95B;
+}
+
+.key.absent{
+  background-color: #EC5D49;
+}
