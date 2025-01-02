@@ -8,9 +8,13 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([])
 
+  const wrongGuessCount = guessedLetters.filter(letter => !word.includes(letter)).length
+
+  console.log(wrongGuessCount)
+
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
 
-  function handleClick(letter) {
+  function addGuessedLetters(letter) {
     setGuessedLetters(prevArr =>
       prevArr.includes(letter) ? prevArr : [...prevArr, letter]
     )
@@ -71,7 +75,7 @@ function App() {
             })
 
             return (
-              <button onClick={() => handleClick(char)} className={`key ${keyState}`} key={char}>{char}</button>
+              <button onClick={() => addGuessedLetters(char)} className={`key ${keyState}`} key={char}>{char}</button>
             )
 
           }
