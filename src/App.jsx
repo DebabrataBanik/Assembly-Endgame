@@ -43,9 +43,14 @@ function App() {
 
       <section className="word">
         {
-          Array.from(word).map((char, index) => (
-            <span className="char" key={index}>{char}</span>
-          ))
+          Array.from(word).map((char, index) => {
+
+            const isGuessed = guessedLetters.includes(char);
+
+
+            return <span className="char" key={index}>{isGuessed ? char : ''}</span>
+          }
+          )
         }
 
       </section>
