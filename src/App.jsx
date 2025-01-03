@@ -67,7 +67,10 @@ function App() {
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
       </header>
 
-      <section className="game-result">
+      <section
+        role="status"
+        aria-live="polite"
+        className="game-result">
 
         {renderGameStatus()}
 
@@ -110,6 +113,24 @@ function App() {
 
       </section>
 
+      <section
+        className="sr-only"
+        aria-live="polite"
+        role="status"
+      >
+        <p>
+          {word.includes(lastGuessedLetter) ?
+            `Correct! The letter ${lastGuessedLetter} is in the word.` :
+            `Sorry, the letter ${lastGuessedLetter} is not in the word.`
+          }
+
+        </p>
+        <p>Current word: {word.split("").map(letter =>
+          guessedLetters.includes(letter) ? letter + "." : "blank.")
+          .join(" ")}</p>
+
+      </section>
+
       <section className="keyboard">
         {
 
@@ -130,6 +151,8 @@ function App() {
                 onClick={() => addGuessedLetters(char)} className={`key ${keyState}`}
                 key={char}
                 disabled={isGameOver}
+                aria-label={`Letters ${char}`}
+                aria-disabled={guessedLetters.includes(char)}
               >
                 {char}
               </button>
