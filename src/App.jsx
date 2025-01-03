@@ -2,7 +2,7 @@ import { languages } from "./languages"
 import { useState } from 'react'
 import { clsx } from 'clsx'
 import { getFarewellText, chooseRandomWord } from "./utils"
-
+import Confetti from 'react-confetti'
 function App() {
 
   // state variables
@@ -66,6 +66,13 @@ function App() {
 
   return (
     <main className="container">
+      {
+        isGameWon &&
+        <Confetti
+          recycle={false}
+          numberOfPieces={1000}
+        />
+      }
       <header>
         <h1>Assembly Endgame</h1>
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
