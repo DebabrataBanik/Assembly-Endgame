@@ -81,12 +81,15 @@ function App() {
               const langLost = index < wrongGuessCount
 
               return (
-                <li key={language.name}><button
-                  className={langLost ? 'lost' : ''}
-                  style={{
-                    backgroundColor: language.backgroundColor,
-                    color: language.color
-                  }}>{language.name}</button></li>
+                <li key={language.name}>
+                  <button
+                    className={langLost ? 'lost' : ''}
+                    style={{
+                      backgroundColor: language.backgroundColor,
+                      color: language.color
+                    }}>{language.name}</button>
+
+                </li>
               )
             })
           }
@@ -123,7 +126,13 @@ function App() {
             })
 
             return (
-              <button onClick={() => addGuessedLetters(char)} className={`key ${keyState}`} key={char}>{char}</button>
+              <button
+                onClick={() => addGuessedLetters(char)} className={`key ${keyState}`}
+                key={char}
+                disabled={isGameOver}
+              >
+                {char}
+              </button>
             )
 
           }
