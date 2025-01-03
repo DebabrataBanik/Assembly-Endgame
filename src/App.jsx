@@ -1,21 +1,26 @@
 import { languages } from "./languages"
 import { useState } from 'react'
 import { clsx } from 'clsx'
+import { getFarewellText } from "./utils"
 
 function App() {
 
+  // state variables
   const [word, setWord] = useState("react")
-
   const [guessedLetters, setGuessedLetters] = useState([])
 
+
+  // derived varaibles
   const wrongGuessCount = guessedLetters.filter(letter => !word.includes(letter)).length
 
   const isGameLost = wrongGuessCount >= languages.length - 1
-
   const isGameWon = word.split('').every(char => guessedLetters.includes(char))
-
   const isGameOver = isGameLost || isGameWon
 
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
+  const isLastGuessCorrect = lastGuessedLetter && word.includes(lastGuessedLetter)
+
+  // static varaibles
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
 
   function addGuessedLetters(letter) {
@@ -24,9 +29,16 @@ function App() {
     )
   }
   function renderGameStatus() {
-    // if (!isGameOver) {
-    //   return null
-    // }
+    if (!isGameOver && !isLastGuessCorrect) {
+
+      if (wrongGuessCount) {
+        return (
+          <section className="farewell">
+            <h3>{getFarewellText(languages[wrongGuessCount - 1].name)}</h3>
+          </section>
+        )
+      }
+    }
 
     if (isGameOver) {
       if (isGameWon) {
@@ -36,7 +48,8 @@ function App() {
             <p>Well done! 🎉</p>
           </section>
         )
-      } else {
+      }
+      if (isGameLost) {
         return (
           <section className="game-lost">
             <h2>Game Over!</h2>
