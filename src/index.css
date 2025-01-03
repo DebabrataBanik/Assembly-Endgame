@@ -143,6 +143,10 @@ p{
   border-bottom: 1px solid #F9F4DA;
 }
 
+.char.missed{
+  color: #BA2A2A;
+}
+
 .keyboard{
   display: flex;
   flex-wrap: wrap;

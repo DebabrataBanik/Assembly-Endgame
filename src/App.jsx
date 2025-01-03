@@ -1,14 +1,13 @@
 import { languages } from "./languages"
 import { useState } from 'react'
 import { clsx } from 'clsx'
-import { getFarewellText } from "./utils"
+import { getFarewellText, chooseRandomWord } from "./utils"
 
 function App() {
 
   // state variables
-  const [word, setWord] = useState("react")
+  const [word, setWord] = useState(() => chooseRandomWord())
   const [guessedLetters, setGuessedLetters] = useState([])
-
 
   // derived varaibles
   const wrongGuessCount = guessedLetters.filter(letter => !word.includes(letter)).length
@@ -27,6 +26,11 @@ function App() {
     setGuessedLetters(prevArr =>
       prevArr.includes(letter) ? prevArr : [...prevArr, letter]
     )
+  }
+
+  function newGame() {
+    setGuessedLetters([])
+    setWord(chooseRandomWord())
   }
   function renderGameStatus() {
     if (!isGameOver && !isLastGuessCorrect) {
@@ -105,8 +109,24 @@ function App() {
 
             const isGuessed = guessedLetters.includes(char);
 
+            return (
+              isGameOver ? (
+                <span
+                  className={`char ${isGameLost && !guessedLetters.includes(char) && 'missed'}`}
+                  key={index}
+                >
+                  {char}
+                </span>
+              ) : (
+                <span
+                  className="char"
+                  key={index}
+                >
+                  {isGuessed ? char : ''}
+                </span>
+              )
+            )
 
-            return <span className="char" key={index}>{isGuessed ? char : ''}</span>
           }
           )
         }
@@ -166,7 +186,10 @@ function App() {
       <section className="btn__container">
         {
           isGameOver && (
-            <button className="newgame">
+            <button
+              className="newgame"
+              onClick={newGame}
+            >
               New Game
             </button>
           )
