@@ -10,7 +10,11 @@ function App() {
 
   const wrongGuessCount = guessedLetters.filter(letter => !word.includes(letter)).length
 
-  console.log(wrongGuessCount)
+  const isGameLost = wrongGuessCount >= languages.length - 1
+
+  const isGameWon = word.split('').every(char => guessedLetters.includes(char))
+
+  const isGameOver = isGameLost || isGameWon
 
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
 
@@ -18,6 +22,29 @@ function App() {
     setGuessedLetters(prevArr =>
       prevArr.includes(letter) ? prevArr : [...prevArr, letter]
     )
+  }
+  function renderGameStatus() {
+    // if (!isGameOver) {
+    //   return null
+    // }
+
+    if (isGameOver) {
+      if (isGameWon) {
+        return (
+          <section className="game-won">
+            <h2>You win!</h2>
+            <p>Well done! 🎉</p>
+          </section>
+        )
+      } else {
+        return (
+          <section className="game-lost">
+            <h2>Game Over!</h2>
+            <p>You lose! Better start learning Assembly 😭</p>
+          </section>
+        )
+      }
+    }
   }
 
   return (
@@ -28,19 +55,27 @@ function App() {
       </header>
 
       <section className="game-result">
-        <h2>You win!</h2>
-        <p>Well done! 🎉</p>
+
+        {renderGameStatus()}
+
       </section>
 
       <section className="languages__container">
         <ul className="languages">
           {
-            languages.map(language => (
-              <li key={language.name}><button style={{
-                backgroundColor: language.backgroundColor,
-                color: language.color
-              }}>{language.name}</button></li>
-            ))
+            languages.map((language, index) => {
+
+              const langLost = index < wrongGuessCount
+
+              return (
+                <li key={language.name}><button
+                  className={langLost ? 'lost' : ''}
+                  style={{
+                    backgroundColor: language.backgroundColor,
+                    color: language.color
+                  }}>{language.name}</button></li>
+              )
+            })
           }
         </ul>
       </section>
@@ -83,9 +118,16 @@ function App() {
         }
       </section>
 
-      <button className="newgame">
-        New Game
-      </button>
+      <section className="btn__container">
+        {
+          isGameOver && (
+            <button className="newgame">
+              New Game
+            </button>
+          )
+        }
+      </section>
+
     </main >
   )
 }
